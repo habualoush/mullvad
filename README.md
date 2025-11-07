@@ -2,6 +2,10 @@
 
 A Node.js website that displays **real** Mullvad VPN servers (all 500+ active servers) and finds the closest server to your location using geolocation and optional ping testing.
 
+**Live Site:** [https://mullvadservers.com/](https://mullvadservers.com/)  
+**Repository:** [https://github.com/habualoush/mullvad](https://github.com/habualoush/mullvad)  
+**Version:** 1.0.0
+
 ## Features
 
 - **Real-time Mullvad API integration** - Fetches live server data from Mullvad's official API
@@ -57,20 +61,17 @@ This will fetch all active Mullvad servers and populate your Supabase database w
 - Server locations grouped by city
 - Individual server details (500+ servers)
 
-5. **Customize GitHub Links (Optional)**:
-   - Open `public/index.html`
-   - Replace all instances of `YOUR_GITHUB_USERNAME` with your actual GitHub username
-   - Update the repository name `mullvad-server-finder` if you've named it differently
-   - If you don't have GitHub Sponsors set up, you can remove the sponsor buttons or replace with alternative donation links
+5. **GitHub Integration (Already Configured)**:
+   - Repository: [https://github.com/habualoush/mullvad](https://github.com/habualoush/mullvad)
+   - Sponsor Link: [https://github.com/sponsors/habualoush](https://github.com/sponsors/habualoush)
+   - All links are pre-configured in the project
 
-6. **Configure SEO Settings (Recommended)**:
-   - Open `public/index.html`
-   - Replace `https://your-domain.com/` with your actual domain (appears in multiple meta tags)
-   - Update Open Graph image URLs:
-     - `og:image` - Create a 1200x630px image and update the URL
-     - `twitter:image` - Create a 1200x600px image and update the URL
-   - Customize meta description if needed
-   - Update canonical URL with your actual domain
+6. **Configure SEO Settings (Optional)**:
+   - The site is already configured for https://mullvadservers.com/
+   - If you want to use a different domain, update all URLs in `public/index.html`
+   - Create custom Open Graph images:
+     - `og:image` - 1200x630px image saved as `public/og-image.jpg`
+     - `twitter:image` - 1200x600px image saved as `public/twitter-card.jpg`
 
 ## Running the Application
 
@@ -137,14 +138,19 @@ The application includes comprehensive SEO optimization:
 - **Canonical URLs**: Prevents duplicate content issues
 - **Semantic HTML**: Proper heading hierarchy and semantic elements
 
-### Customizing SEO
+### SEO Configuration
 
-1. Replace `https://your-domain.com/` with your actual domain in all meta tags
-2. Create social sharing images:
+The project is pre-configured for **https://mullvadservers.com/** with:
+1. All meta tags updated with the correct domain
+2. Canonical URLs properly set
+3. Open Graph and Twitter Card tags configured
+4. JSON-LD structured data for search engines
+
+To customize:
+1. Create social sharing images in the `public/` folder:
    - **Open Graph**: 1200x630px (saved as `og-image.jpg`)
    - **Twitter Card**: 1200x600px (saved as `twitter-card.jpg`)
-3. Update the canonical URL to match your domain
-4. Customize meta descriptions for your specific use case
+2. Modify meta descriptions if needed for your use case
 
 ## Contributing
 
@@ -158,9 +164,9 @@ Contributions are welcome! Feel free to:
 ## Support the Project
 
 If you find this tool useful, please consider:
-- **Star the repository** on GitHub
-- **[Sponsor on GitHub](https://github.com/sponsors/YOUR_GITHUB_USERNAME)** to support ongoing development
-- Share it with others who might benefit from it
+- **Star the repository** on [GitHub](https://github.com/habualoush/mullvad)
+- **[Sponsor on GitHub](https://github.com/sponsors/habualoush)** to support ongoing development
+- Share [https://mullvadservers.com/](https://mullvadservers.com/) with others who might benefit from it
 - Contribute code or documentation improvements
 
 Your support helps maintain and improve this tool for the privacy community!

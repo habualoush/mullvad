@@ -1,15 +1,32 @@
 {
   "name": "mullvad-server-finder",
   "version": "1.0.0",
-  "description": "A simple website to find the closest Mullvad VPN server",
+  "description": "Find the fastest Mullvad VPN WireGuard server near you. Test latency on 500+ servers across 90+ cities worldwide.",
   "main": "server.js",
+  "homepage": "https://mullvadservers.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/habualoush/mullvad.git"
+  },
+  "bugs": {
+    "url": "https://github.com/habualoush/mullvad/issues"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
     "setup-db": "node setup-supabase.js"
   },
-  "keywords": ["mullvad", "vpn", "server", "geolocation"],
-  "author": "",
+  "keywords": [
+    "mullvad",
+    "vpn",
+    "wireguard",
+    "server-finder",
+    "geolocation",
+    "latency-test",
+    "privacy",
+    "security"
+  ],
+  "author": "habualoush",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",

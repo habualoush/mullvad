@@ -1,7 +1,5 @@
 # GitHub Sponsors configuration
-# Replace YOUR_GITHUB_USERNAME with your actual GitHub username
-
-github: [YOUR_GITHUB_USERNAME]
+github: [habualoush]
 
 # You can also add other funding platforms:
 # patreon: your_patreon_username
