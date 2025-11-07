@@ -4,18 +4,18 @@ A Node.js website that displays **real** Mullvad VPN servers (all 500+ active se
 
 ## Features
 
-- 🌍 **Real-time Mullvad API integration** - Fetches live server data from Mullvad's official API
-- 📍 **Find the closest server** to your current location using browser geolocation
-- 🎯 **Distance calculation** using the Haversine formula
-- 🔍 **Ping servers** to measure actual latency (requires server to be accessible)
-- 🗺️ **Automatic geocoding** of city locations using OpenStreetMap Nominatim API
-- 💻 Modern, responsive UI with gradient styling and comprehensive instructions
-- 📊 Shows server details: provider, speed, ownership status, and more
-- 🔝 **Back to top button** for easy navigation
-- 🏠 **Clickable homepage title** to reset and return to start
-- 🎨 **GitHub Sponsors integration** for project support
-- 🚀 **SEO optimized** with comprehensive meta tags for better search visibility
-- 📱 **Mobile-friendly** with responsive design and PWA capabilities
+- **Real-time Mullvad API integration** - Fetches live server data from Mullvad's official API
+- **Find the closest server** to your current location using browser geolocation
+- **Distance calculation** using the Haversine formula
+- **Ping servers** to measure actual latency (requires server to be accessible)
+- **Automatic geocoding** of city locations using OpenStreetMap Nominatim API
+- **Modern, responsive UI** with gradient styling and comprehensive instructions
+- **Server details** - Shows provider, speed, ownership status, and more
+- **Back to top button** for easy navigation
+- **Clickable homepage title** to reset and return to start
+- **GitHub Sponsors integration** for project support
+- **SEO optimized** with comprehensive meta tags for better search visibility
+- **Mobile-friendly** with responsive design and PWA capabilities
 
 ## Data Sources
 
@@ -149,19 +149,19 @@ The application includes comprehensive SEO optimization:
 ## Contributing
 
 Contributions are welcome! Feel free to:
-- 🐛 Report bugs and issues
-- 💡 Suggest new features
-- 🔧 Submit pull requests
-- 📖 Improve documentation
-- ⭐ Star the repository if you find it useful
+- Report bugs and issues
+- Suggest new features
+- Submit pull requests
+- Improve documentation
+- Star the repository if you find it useful
 
 ## Support the Project
 
 If you find this tool useful, please consider:
-- ⭐ **Star the repository** on GitHub
-- 💖 **[Sponsor on GitHub](https://github.com/sponsors/YOUR_GITHUB_USERNAME)** to support ongoing development
-- 🐦 Share it with others who might benefit from it
-- 🤝 Contribute code or documentation improvements
+- **Star the repository** on GitHub
+- **[Sponsor on GitHub](https://github.com/sponsors/YOUR_GITHUB_USERNAME)** to support ongoing development
+- Share it with others who might benefit from it
+- Contribute code or documentation improvements
 
 Your support helps maintain and improve this tool for the privacy community!
 

@@ -109,7 +109,7 @@ function displayTopServers(servers) {
     
     servers.forEach((server, index) => {
         const ownershipBadge = server.owned ? '<span style="background: #ffcd00; color: #192e45; padding: 2px 8px; border-radius: 3px; font-size: 0.7em; margin-left: 10px;">OWNED</span>' : '';
-        const rankBadge = index === 0 ? '🏆' : `#${index + 1}`;
+        const rankBadge = index === 0 ? '#1' : `#${index + 1}`;
         const latencyColor = server.tcpLatency ? (server.tcpLatency < 50 ? '#69db7c' : server.tcpLatency < 100 ? '#ffcd00' : '#ff9d6b') : '#8195a5';
         
         const serverCard = document.createElement('div');
@@ -195,7 +195,7 @@ function renderCities(cities) {
         card.style.cursor = 'pointer';
         card.style.transition = 'all 0.3s ease';
         
-        const ownershipText = cityData.owned ? '<span style="color: #ffcd00;">●</span> Owned' : 'Rented';
+        const ownershipText = cityData.owned ? '<span style="color: #ffcd00;">•</span> Owned' : 'Rented';
         const expandIcon = '<span class="expand-icon" style="float: right; font-size: 1.2em;">▼</span>';
         
         card.innerHTML = `
@@ -406,7 +406,7 @@ async function loadCityServers(cityData, container) {
                     pingButton.textContent = 'Testing...';
                     pingButton.style.opacity = '0.6';
                     pingButton.style.cursor = 'wait';
-                    latencyResult.innerHTML = '<span style="color: #ffcd00;">●</span>';
+                    latencyResult.innerHTML = '<span style="color: #ffcd00;">•</span>';
                     
                     try {
                         const response = await fetch(`/api/ping/${serverData.server.hostname}`);
@@ -464,19 +464,19 @@ async function pingServerHandler(hostname, resultElementId) {
         pingBtn.textContent = 'Testing...';
     }
     
-    resultDiv.innerHTML = '<span style="color: #ffcd00;">● Testing connection...</span>';
+    resultDiv.innerHTML = '<span style="color: #ffcd00;">Testing connection...</span>';
     
     try {
         const response = await fetch(`/api/ping/${hostname}`);
         const data = await response.json();
         
         if (data.status === 'success' && data.latency) {
-            resultDiv.innerHTML = `<span style="color: #69db7c; font-size: 1.2em;">✓ Latency: ${data.latency} ms</span>`;
+            resultDiv.innerHTML = `<span style="color: #69db7c; font-size: 1.2em;">Latency: ${data.latency} ms</span>`;
         } else {
-            resultDiv.innerHTML = '<span style="color: #ff6b6b;">✗ Server timeout or unreachable</span>';
+            resultDiv.innerHTML = '<span style="color: #ff6b6b;">Server timeout or unreachable</span>';
         }
     } catch (error) {
-        resultDiv.innerHTML = '<span style="color: #ff6b6b;">✗ Error testing connection</span>';
+        resultDiv.innerHTML = '<span style="color: #ff6b6b;">Error testing connection</span>';
     } finally {
         if (pingBtn) {
             pingBtn.disabled = false;
