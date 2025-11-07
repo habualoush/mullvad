@@ -12,9 +12,72 @@
 <body>
     <div class="container">
         <header>
-            <h1>Mullvad Server Finder</h1>
-            <p>Find the closest WireGuard server to your location</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <h1>Mullvad Server Finder</h1>
+                    <p>Find the closest WireGuard server to your location</p>
+                </div>
+                <div style="text-align: right;">
+                    <a href="https://github.com/sponsors/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener" 
+                       style="display: inline-flex; align-items: center; gap: 8px; background: #ea4aaa; color: white; 
+                              padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; 
+                              transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(234, 74, 170, 0.3);"
+                       onmouseover="this.style.background='#d63a8f'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(234, 74, 170, 0.4)';"
+                       onmouseout="this.style.background='#ea4aaa'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(234, 74, 170, 0.3)';">
+                        <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                            <path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"></path>
+                        </svg>
+                        Sponsor
+                    </a>
+                    <div style="margin-top: 8px; font-size: 0.85em; color: #8195a5;">Support this project</div>
+                </div>
+            </div>
         </header>
+
+        <div class="instructions-box" style="background: linear-gradient(135deg, #1d3a54 0%, #294d73 100%); 
+             border-left: 4px solid #ffcd00; padding: 25px; margin-bottom: 30px; border-radius: 8px; 
+             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+            <h2 style="color: #ffffff; margin-top: 0; margin-bottom: 15px; font-size: 1.3em;">
+                🚀 How to Use
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; color: #b8c9d9;">
+                <div>
+                    <h3 style="color: #ffcd00; margin: 0 0 10px 0; font-size: 1.1em; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #ffcd00; color: #192e45; width: 24px; height: 24px; border-radius: 50%; 
+                              display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9em;">1</span>
+                        Find Your Best Server
+                    </h3>
+                    <p style="margin: 0; line-height: 1.6;">
+                        Click <strong>"Find Closest Server"</strong> to automatically detect your location and get the top 5 fastest servers ranked by <strong>actual network latency</strong>. 
+                        You'll need to allow location access when prompted.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: #69db7c; margin: 0 0 10px 0; font-size: 1.1em; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #69db7c; color: #192e45; width: 24px; height: 24px; border-radius: 50%; 
+                              display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9em;">2</span>
+                        Browse All Options
+                    </h3>
+                    <p style="margin: 0; line-height: 1.6;">
+                        Click <strong>"Browse All Servers"</strong> to explore all <strong>500+ Mullvad WireGuard servers</strong> across 90+ cities worldwide. 
+                        Expand any city to see individual servers and test their latency.
+                    </p>
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 205, 0, 0.1); border-radius: 6px; border: 1px solid rgba(255, 205, 0, 0.3);">
+                <p style="margin: 0; color: #ffcd00; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"></path>
+                    </svg>
+                    Pro Tip:
+                </p>
+                <p style="margin: 8px 0 0 0; color: #b8c9d9; line-height: 1.6;">
+                    Lower latency (ms) = faster connection. Look for servers with <strong>&lt;50ms</strong> for the best performance. 
+                    Servers marked with <span style="background: #ffcd00; color: #192e45; padding: 2px 6px; border-radius: 3px; font-size: 0.85em; font-weight: 600;">OWNED</span> 
+                    are operated directly by Mullvad for enhanced privacy.
+                </p>
+            </div>
+        </div>
 
         <div id="status" class="status"></div>
 
@@ -39,8 +102,63 @@
         <div id="serversList" class="servers-list"></div>
         
         <footer>
-            <p>Data from <a href="https://api.mullvad.net/www/relays/wireguard/" target="_blank" rel="noopener">Mullvad API</a></p>
-            <p>Unofficial tool • Not affiliated with Mullvad VPN</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 20px;">
+                <div>
+                    <h3 style="color: #ffffff; margin: 0 0 12px 0; font-size: 1em;">About</h3>
+                    <p style="margin: 0; line-height: 1.6;">
+                        Unofficial tool to find the fastest Mullvad VPN servers. 
+                        Real-time data from <a href="https://api.mullvad.net/www/relays/wireguard/" target="_blank" rel="noopener">Mullvad API</a>.
+                    </p>
+                    <p style="margin: 10px 0 0 0; color: #8195a5; font-size: 0.9em;">
+                        Not affiliated with Mullvad VPN AB
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: #ffffff; margin: 0 0 12px 0; font-size: 1em;">Open Source</h3>
+                    <p style="margin: 0 0 10px 0; line-height: 1.6;">
+                        This project is open source and free to use. Check out the code, report issues, or contribute!
+                    </p>
+                    <a href="https://github.com/YOUR_GITHUB_USERNAME/mullvad-server-finder" target="_blank" rel="noopener"
+                       style="display: inline-flex; align-items: center; gap: 6px; color: #69db7c; text-decoration: none; 
+                              font-weight: 600; transition: all 0.2s;"
+                       onmouseover="this.style.color='#7ee88a';"
+                       onmouseout="this.style.color='#69db7c';">
+                        <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor">
+                            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+                <div>
+                    <h3 style="color: #ffffff; margin: 0 0 12px 0; font-size: 1em;">Support Development</h3>
+                    <p style="margin: 0 0 10px 0; line-height: 1.6;">
+                        Help keep this project running and maintained. Your support is appreciated!
+                    </p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://github.com/sponsors/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener"
+                           style="display: inline-flex; align-items: center; gap: 6px; background: rgba(234, 74, 170, 0.2); 
+                                  color: #ea4aaa; padding: 8px 16px; border-radius: 6px; text-decoration: none; 
+                                  font-weight: 600; border: 1px solid rgba(234, 74, 170, 0.4); transition: all 0.2s;"
+                           onmouseover="this.style.background='rgba(234, 74, 170, 0.3)'; this.style.borderColor='rgba(234, 74, 170, 0.6)';"
+                           onmouseout="this.style.background='rgba(234, 74, 170, 0.2)'; this.style.borderColor='rgba(234, 74, 170, 0.4)';">
+                            <svg height="14" viewBox="0 0 16 16" width="14" fill="currentColor">
+                                <path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"></path>
+                            </svg>
+                            Sponsor
+                        </a>
+                        <a href="https://github.com/YOUR_GITHUB_USERNAME/mullvad-server-finder/issues" target="_blank" rel="noopener"
+                           style="display: inline-flex; align-items: center; gap: 6px; color: #b8c9d9; 
+                                  text-decoration: none; font-weight: 500; transition: all 0.2s;"
+                           onmouseover="this.style.color='#ffffff';"
+                           onmouseout="this.style.color='#b8c9d9';">
+                            Report Issue
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #2d4f6c; color: #8195a5; font-size: 0.9em;">
+                <p style="margin: 0;">Made with ❤️ for the privacy community • Licensed under MIT</p>
+            </div>
         </footer>
     </div>
 

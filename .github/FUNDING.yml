@@ -1,0 +1,15 @@
+# GitHub Sponsors configuration
+# Replace YOUR_GITHUB_USERNAME with your actual GitHub username
+
+github: [YOUR_GITHUB_USERNAME]
+
+# You can also add other funding platforms:
+# patreon: your_patreon_username
+# open_collective: your_collective
+# ko_fi: your_kofi_username
+# tidelift: npm/package-name
+# community_bridge: project-name
+# liberapay: your_liberapay_username
+# issuehunt: your_issuehunt_username
+# custom: ['https://www.paypal.me/your_username', 'https://donate.example.com']
+

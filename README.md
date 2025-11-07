@@ -52,6 +52,12 @@ This will fetch all active Mullvad servers and populate your Supabase database w
 - Server locations grouped by city
 - Individual server details (500+ servers)
 
+5. **Customize GitHub Links (Optional)**:
+   - Open `public/index.html`
+   - Replace all instances of `YOUR_GITHUB_USERNAME` with your actual GitHub username
+   - Update the repository name `mullvad-server-finder` if you've named it differently
+   - If you don't have GitHub Sponsors set up, you can remove the sponsor buttons or replace with alternative donation links
+
 ## Running the Application
 
 Start the server:
@@ -104,6 +110,25 @@ The application will be available at `http://localhost:3000`
 ## Server Count
 
 As of the latest Mullvad data: **~526 active WireGuard servers** across **~90 cities worldwide**
+
+## Contributing
+
+Contributions are welcome! Feel free to:
+- 🐛 Report bugs and issues
+- 💡 Suggest new features
+- 🔧 Submit pull requests
+- 📖 Improve documentation
+- ⭐ Star the repository if you find it useful
+
+## Support the Project
+
+If you find this tool useful, please consider:
+- ⭐ **Star the repository** on GitHub
+- 💖 **[Sponsor on GitHub](https://github.com/sponsors/YOUR_GITHUB_USERNAME)** to support ongoing development
+- 🐦 Share it with others who might benefit from it
+- 🤝 Contribute code or documentation improvements
+
+Your support helps maintain and improve this tool for the privacy community!
 
 ## License
 
