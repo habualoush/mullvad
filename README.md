@@ -20,6 +20,8 @@ A Node.js website that displays **real** Mullvad VPN servers (all 500+ active se
 - **GitHub Sponsors integration** for project support
 - **SEO optimized** with comprehensive meta tags for better search visibility
 - **Mobile-friendly** with responsive design and PWA capabilities
+- **Privacy-compliant cookie consent** with GDPR/CCPA compliance
+- **Google Analytics integration** with anonymized tracking and user consent
 
 ## Data Sources
 
@@ -151,6 +153,44 @@ To customize:
    - **Open Graph**: 1200x630px (saved as `og-image.jpg`)
    - **Twitter Card**: 1200x600px (saved as `twitter-card.jpg`)
 2. Modify meta descriptions if needed for your use case
+
+## Analytics & Privacy
+
+### Google Analytics Integration
+
+The site includes Google Analytics (GA4) tracking with **privacy-first features**:
+
+- **Measurement ID**: `G-43EGPNC37Y`
+- **IP Anonymization**: All IP addresses are anonymized
+- **Consent-Based Loading**: Analytics only loads after user consent
+- **Cookie Compliance**: Full GDPR/CCPA compliance
+
+### Cookie Consent System
+
+A beautiful, privacy-respecting cookie consent banner that:
+
+- Appears on first visit with a 1-second delay
+- Stores user preference in `localStorage`
+- Includes "Accept All" and "Decline" options
+- Features a detailed cookie policy modal
+- Allows users to change preferences anytime via footer link
+- Blocks analytics tracking until consent is given
+
+**Features:**
+- Clean, professional design matching the site theme
+- Fully responsive for mobile devices
+- Detailed cookie policy explaining data usage
+- Easy-to-access cookie settings in the footer
+- No tracking without explicit user consent
+
+### Privacy Compliance
+
+The implementation follows privacy best practices:
+- **Opt-in by default**: No tracking until user accepts
+- **Transparent**: Clear explanation of what data is collected
+- **User control**: Easy to decline or revoke consent
+- **Minimal data**: Only anonymous usage statistics
+- **No PII**: No personally identifiable information collected
 
 ## Contributing
 

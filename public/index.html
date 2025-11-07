@@ -64,6 +64,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics (gtag.js) - Loaded only after consent -->
+    <script>
+        // Cookie consent check
+        function getCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            return consent === 'accepted';
+        }
+        
+        // Load Google Analytics if consent is given
+        if (getCookieConsent()) {
+            (function() {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-43EGPNC37Y';
+                document.head.appendChild(script);
+                
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-43EGPNC37Y', {
+                    'anonymize_ip': true,
+                    'cookie_flags': 'SameSite=None;Secure'
+                });
+            })();
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -184,6 +211,153 @@
             ↑
         </button>
         
+        <!-- Cookie Consent Banner -->
+        <div id="cookieConsent" style="
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1d3a54 0%, #0f2537 100%);
+            color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            border-top: 2px solid #3a6591;
+        ">
+            <div class="container" style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="margin: 0 0 10px 0; color: #ffcd00; font-size: 1.1em;">We Value Your Privacy</h3>
+                        <p style="margin: 0; line-height: 1.6; color: #b8c9d9; font-size: 0.95em;">
+                            We use cookies and Google Analytics to understand how you use our site and improve your experience. 
+                            Your data is anonymized and we respect your privacy. 
+                            <a href="#" id="cookiePolicyLink" style="color: #69db7c; text-decoration: underline;">Learn more about our cookie policy</a>.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <button id="acceptCookies" style="
+                            background: #69db7c;
+                            color: #192e45;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 6px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            font-size: 0.95em;
+                            transition: all 0.2s;
+                            box-shadow: 0 2px 8px rgba(105, 219, 124, 0.3);
+                        " onmouseover="this.style.background='#7ee88a'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(105, 219, 124, 0.4)';"
+                           onmouseout="this.style.background='#69db7c'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(105, 219, 124, 0.3)';">
+                            Accept All
+                        </button>
+                        <button id="declineCookies" style="
+                            background: transparent;
+                            color: #b8c9d9;
+                            border: 2px solid #3a6591;
+                            padding: 12px 24px;
+                            border-radius: 6px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            font-size: 0.95em;
+                            transition: all 0.2s;
+                        " onmouseover="this.style.borderColor='#4a7ab1'; this.style.color='#ffffff';"
+                           onmouseout="this.style.borderColor='#3a6591'; this.style.color='#b8c9d9';">
+                            Decline
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cookie Policy Modal -->
+        <div id="cookiePolicyModal" style="
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10001;
+            overflow-y: auto;
+            padding: 20px;
+        ">
+            <div style="
+                max-width: 800px;
+                margin: 40px auto;
+                background: linear-gradient(135deg, #1d3a54 0%, #294d73 100%);
+                border-radius: 12px;
+                padding: 40px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+                position: relative;
+            ">
+                <button id="closePolicyModal" style="
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    background: transparent;
+                    border: none;
+                    color: #b8c9d9;
+                    font-size: 28px;
+                    cursor: pointer;
+                    line-height: 1;
+                    padding: 0;
+                    width: 32px;
+                    height: 32px;
+                    transition: color 0.2s;
+                " onmouseover="this.style.color='#ffffff';"
+                   onmouseout="this.style.color='#b8c9d9';">×</button>
+                
+                <h2 style="color: #ffffff; margin-top: 0; margin-bottom: 20px;">Cookie Policy</h2>
+                
+                <div style="color: #b8c9d9; line-height: 1.8;">
+                    <h3 style="color: #ffcd00; margin-top: 25px; margin-bottom: 15px;">What Are Cookies?</h3>
+                    <p>Cookies are small text files stored on your device when you visit our website. They help us provide you with a better experience.</p>
+                    
+                    <h3 style="color: #ffcd00; margin-top: 25px; margin-bottom: 15px;">How We Use Cookies</h3>
+                    <p>We use Google Analytics to:</p>
+                    <ul style="margin-left: 20px;">
+                        <li>Understand how visitors use our site</li>
+                        <li>Improve site performance and user experience</li>
+                        <li>Analyze traffic patterns anonymously</li>
+                        <li>Track which features are most popular</li>
+                    </ul>
+                    
+                    <h3 style="color: #ffcd00; margin-top: 25px; margin-bottom: 15px;">Your Privacy</h3>
+                    <p>We take your privacy seriously:</p>
+                    <ul style="margin-left: 20px;">
+                        <li>IP addresses are anonymized</li>
+                        <li>No personally identifiable information is collected</li>
+                        <li>Data is used solely for analytics purposes</li>
+                        <li>You can opt-out at any time</li>
+                    </ul>
+                    
+                    <h3 style="color: #ffcd00; margin-top: 25px; margin-bottom: 15px;">Managing Cookies</h3>
+                    <p>You can change your cookie preferences at any time by clicking the cookie settings link in the footer. You can also clear cookies through your browser settings.</p>
+                    
+                    <h3 style="color: #ffcd00; margin-top: 25px; margin-bottom: 15px;">Third-Party Cookies</h3>
+                    <p>Google Analytics may set cookies to track anonymous usage data. For more information, visit <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener" style="color: #69db7c;">Google's Cookie Policy</a>.</p>
+                </div>
+                
+                <div style="margin-top: 30px; display: flex; gap: 12px; justify-content: flex-end;">
+                    <button class="closePolicyBtn" style="
+                        background: #3a6591;
+                        color: #ffffff;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 6px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                    " onmouseover="this.style.background='#4a7ab1';"
+                       onmouseout="this.style.background='#3a6591';">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+        
         <footer>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 20px;">
                 <div>
@@ -240,13 +414,20 @@
                 </div>
             </div>
             <div style="text-align: center; padding-top: 20px; border-top: 1px solid #2d4f6c; color: #8195a5; font-size: 0.9em;">
-                <p style="margin: 0;">
+                <p style="margin: 0 0 8px 0;">
                     Made for the privacy community • Licensed under MIT<br>
                     <a href="https://mullvadservers.com/" style="color: #69db7c; text-decoration: none; margin-top: 8px; display: inline-block;" 
                        onmouseover="this.style.color='#7ee88a';" 
                        onmouseout="this.style.color='#69db7c';">
                         mullvadservers.com
                     </a> • v1.0.0
+                </p>
+                <p style="margin: 8px 0 0 0; font-size: 0.9em;">
+                    <a href="#" id="cookieSettingsLink" style="color: #8195a5; text-decoration: none; transition: color 0.2s;"
+                       onmouseover="this.style.color='#b8c9d9';"
+                       onmouseout="this.style.color='#8195a5';">
+                        Cookie Settings
+                    </a>
                 </p>
             </div>
         </footer>

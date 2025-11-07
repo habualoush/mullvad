@@ -519,3 +519,98 @@ backToTopBtn.addEventListener('click', () => {
     });
 });
 
+// Cookie Consent Management
+const cookieConsent = document.getElementById('cookieConsent');
+const acceptCookies = document.getElementById('acceptCookies');
+const declineCookies = document.getElementById('declineCookies');
+const cookieSettingsLink = document.getElementById('cookieSettingsLink');
+const cookiePolicyLink = document.getElementById('cookiePolicyLink');
+const cookiePolicyModal = document.getElementById('cookiePolicyModal');
+const closePolicyModal = document.getElementById('closePolicyModal');
+const closePolicyBtns = document.querySelectorAll('.closePolicyBtn');
+
+// Check if user has already made a choice
+function checkCookieConsent() {
+    const consent = localStorage.getItem('cookieConsent');
+    if (!consent) {
+        // Show banner after a short delay
+        setTimeout(() => {
+            cookieConsent.style.display = 'block';
+        }, 1000);
+    }
+}
+
+// Load Google Analytics dynamically
+function loadGoogleAnalytics() {
+    if (typeof gtag === 'undefined') {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-43EGPNC37Y';
+        document.head.appendChild(script);
+        
+        script.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-43EGPNC37Y', {
+                'anonymize_ip': true,
+                'cookie_flags': 'SameSite=None;Secure'
+            });
+            console.log('Google Analytics loaded');
+        };
+    }
+}
+
+// Accept cookies
+acceptCookies.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'accepted');
+    cookieConsent.style.display = 'none';
+    loadGoogleAnalytics();
+    console.log('Cookies accepted');
+});
+
+// Decline cookies
+declineCookies.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'declined');
+    cookieConsent.style.display = 'none';
+    console.log('Cookies declined');
+});
+
+// Cookie settings link - reopens consent banner
+cookieSettingsLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem('cookieConsent');
+    cookieConsent.style.display = 'block';
+});
+
+// Cookie policy link
+cookiePolicyLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    cookiePolicyModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+});
+
+// Close policy modal
+closePolicyModal.addEventListener('click', () => {
+    cookiePolicyModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+closePolicyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        cookiePolicyModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+});
+
+// Close modal when clicking outside
+cookiePolicyModal.addEventListener('click', (e) => {
+    if (e.target === cookiePolicyModal) {
+        cookiePolicyModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Initialize cookie consent check
+checkCookieConsent();
+
