@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Mullvad Server Map - Browse WireGuard VPN Servers on Interactive Map</title>
+    <meta name="description" content="Interactive map of 500+ Mullvad VPN WireGuard servers across 90+ cities worldwide. Find servers by location, test latency, and choose the best server for your needs.">
+    <meta name="keywords" content="Mullvad VPN map, WireGuard server map, VPN server locations, Mullvad server finder, VPN world map, server locations">
+    
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mullvadservers.com/map.html">
+    <meta property="og:title" content="Mullvad Server Map - Browse WireGuard VPN Servers">
+    <meta property="og:description" content="Interactive map of 500+ Mullvad VPN servers worldwide. Find and test servers by location.">
+    <meta property="og:image" content="https://mullvadservers.com/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://mullvadservers.com/map.html">
+    <meta name="twitter:title" content="Mullvad Server Map - Browse WireGuard VPN Servers">
+    <meta name="twitter:description" content="Interactive map of 500+ Mullvad VPN servers worldwide.">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="map-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics (gtag.js) - Loaded only after consent -->
+    <script>
+        function getCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            return consent === 'accepted';
+        }
+        
+        if (getCookieConsent()) {
+            (function() {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-43EGPNC37Y';
+                document.head.appendChild(script);
+                
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-43EGPNC37Y', {
+                    'anonymize_ip': true,
+                    'cookie_flags': 'SameSite=None;Secure'
+                });
+            })();
+        }
+    </script>
+</head>
+<body>
+    <div class="map-container">
+        <header class="map-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>
+                        <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 0.8em;">←</span>
+                            Mullvad Server Map
+                        </a>
+                    </h1>
+                    <p>Browse 500+ WireGuard servers on an interactive map</p>
+                </div>
+                <div class="header-right">
+                    <a href="index.html" class="nav-link">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right: 6px;">
+                            <path d="M1 2.75A.75.75 0 0 1 1.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5A.75.75 0 0 1 1 2.75Zm4 5A.75.75 0 0 1 5.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 5 7.75Zm0 5A.75.75 0 0 1 5.75 12h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1-.75-.75ZM9 2.75A.75.75 0 0 1 9.75 2h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 9 2.75Z"></path>
+                        </svg>
+                        List View
+                    </a>
+                    <button id="myLocationBtn" class="location-btn" title="Center map on my location">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div id="status" class="status"></div>
+
+        <div class="map-controls">
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="ownedOnlyToggle">
+                    <span>Show only Mullvad-owned servers</span>
+                </label>
+            </div>
+            <div class="control-group">
+                <span class="server-count" id="serverCount">Loading servers...</span>
+            </div>
+        </div>
+
+        <div id="map"></div>
+
+        <!-- Legend -->
+        <div class="map-legend">
+            <h3>Legend</h3>
+            <div class="legend-item">
+                <div class="legend-marker" style="background: #ffcd00;"></div>
+                <span>Mullvad-owned servers</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-marker" style="background: #3a6591;"></div>
+                <span>Rented servers</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-marker" style="background: #69db7c;"></div>
+                <span>Your location</span>
+            </div>
+        </div>
+
+        <!-- Server Details Panel -->
+        <div id="serverPanel" class="server-panel">
+            <div class="panel-header">
+                <h2 id="panelTitle">Server Details</h2>
+                <button id="closePanelBtn" class="close-btn">×</button>
+            </div>
+            <div id="panelContent" class="panel-content">
+                <p style="color: #8195a5;">Click on a marker to view server details</p>
+            </div>
+        </div>
+
+        <footer style="padding: 20px; text-align: center; background: #152736; color: #6b7f91; font-size: 0.9em;">
+            <p style="margin: 0;">
+                <a href="index.html" style="color: #69db7c; text-decoration: none;">List View</a> • 
+                <a href="https://github.com/habualoush/mullvad" target="_blank" rel="noopener" style="color: #69db7c; text-decoration: none;">GitHub</a> • 
+                <a href="https://github.com/sponsors/habualoush" target="_blank" rel="noopener" style="color: #ea4aaa; text-decoration: none;">Sponsor</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Google Maps API -->
+    <script>
+        // Initialize map
+        let map;
+        let markers = [];
+        let allServers = [];
+        let userMarker = null;
+        let infoWindow;
+
+        // Load Google Maps API dynamically with API key from server
+        async function loadGoogleMapsAPI() {
+            try {
+                const response = await fetch('/api/maps-key');
+                const data = await response.json();
+                
+                if (!data.apiKey) {
+                    showStatus('Google Maps API key not configured. Please set GOOGLE_MAPS_API_KEY in your .env file', 'error');
+                    return;
+                }
+                
+                // Load Google Maps script
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${data.apiKey}&callback=initMap`;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            } catch (error) {
+                console.error('Error loading Google Maps API:', error);
+                showStatus('Error loading map. Please check your configuration.', 'error');
+            }
+        }
+
+        // Call this on page load
+        document.addEventListener('DOMContentLoaded', loadGoogleMapsAPI);
+
+        function initMap() {
+            // Create map centered on Europe initially
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 3,
+                center: { lat: 50, lng: 10 },
+                styles: [
+                    {
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#192e45"}]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [{"color": "#192e45"}]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [{"color": "#8195a5"}]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#0d1f2f"}]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#2d4f6c"}]
+                    }
+                ]
+            });
+
+            infoWindow = new google.maps.InfoWindow();
+
+            // Load servers after map is initialized
+            loadServers();
+        }
+
+        async function loadServers() {
+            try {
+                showStatus('Loading servers...', 'info');
+                const response = await fetch('/api/servers-map');
+                allServers = await response.json();
+                
+                updateServerCount();
+                displayServers();
+                showStatus(`Loaded ${allServers.length} server locations`, 'success');
+                setTimeout(() => document.getElementById('status').style.display = 'none', 3000);
+            } catch (error) {
+                console.error('Error loading servers:', error);
+                showStatus('Error loading servers', 'error');
+            }
+        }
+
+        function updateServerCount() {
+            const ownedOnly = document.getElementById('ownedOnlyToggle').checked;
+            const filtered = ownedOnly ? allServers.filter(s => s.owned) : allServers;
+            document.getElementById('serverCount').textContent = 
+                `${filtered.length} locations • ${filtered.reduce((sum, s) => sum + s.serverCount, 0)} servers`;
+        }
+
+        function displayServers() {
+            // Clear existing markers
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+
+            const ownedOnly = document.getElementById('ownedOnlyToggle').checked;
+            const serversToDisplay = ownedOnly ? allServers.filter(s => s.owned) : allServers;
+
+            // Create markers for servers with coordinates
+            serversToDisplay.forEach((server) => {
+                // Skip if no coordinates
+                if (!server.latitude || !server.longitude) {
+                    console.warn(`No coordinates for ${server.city}, ${server.country}`);
+                    return;
+                }
+
+                const location = { lat: server.latitude, lng: server.longitude };
+                
+                const marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: `${server.city}, ${server.country}`,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 8,
+                        fillColor: server.owned ? '#ffcd00' : '#3a6591',
+                        fillOpacity: 0.9,
+                        strokeColor: '#ffffff',
+                        strokeWeight: 2
+                    }
+                });
+
+                marker.addListener('click', () => {
+                    showServerDetails(server);
+                });
+
+                markers.push(marker);
+            });
+
+            updateServerCount();
+        }
+
+        function showServerDetails(server) {
+            const panel = document.getElementById('serverPanel');
+            const content = document.getElementById('panelContent');
+            
+            const ownershipBadge = server.owned 
+                ? '<span style="background: #ffcd00; color: #192e45; padding: 3px 10px; border-radius: 3px; font-size: 0.75em; font-weight: 700;">OWNED</span>' 
+                : '<span style="background: #3a6591; color: #ffffff; padding: 3px 10px; border-radius: 3px; font-size: 0.75em;">RENTED</span>';
+            
+            content.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #ffffff; margin: 0 0 10px 0; font-size: 1.5em;">
+                        ${server.city}, ${server.country_code.toUpperCase()}
+                    </h3>
+                    <p style="color: #b8c9d9; margin: 5px 0;">${server.country}</p>
+                    <div style="margin: 15px 0;">
+                        ${ownershipBadge}
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="color: #8195a5; font-size: 0.9em; margin: 8px 0;">
+                        <strong style="color: #b8c9d9;">Provider:</strong> ${server.provider}
+                    </div>
+                    <div style="color: #8195a5; font-size: 0.9em; margin: 8px 0;">
+                        <strong style="color: #b8c9d9;">Speed:</strong> ${server.speed} Gbps
+                    </div>
+                    <div style="color: #8195a5; font-size: 0.9em; margin: 8px 0;">
+                        <strong style="color: #b8c9d9;">Servers:</strong> ${server.serverCount}
+                    </div>
+                </div>
+
+                <div id="serversList_${server.city_code}" style="margin-top: 20px;">
+                    <h4 style="color: #ffcd00; margin-bottom: 12px;">Individual Servers</h4>
+                    <div style="text-align: center; padding: 20px; color: #8195a5;">Loading servers...</div>
+                </div>
+            `;
+            
+            panel.classList.add('show');
+
+            // Load individual servers
+            loadIndividualServers(server);
+        }
+
+        async function loadIndividualServers(server) {
+            const container = document.getElementById(`serversList_${server.city_code}`);
+            
+            try {
+                const response = await fetch(`/api/servers/${server.city_code}/${server.country_code}`);
+                const servers = await response.json();
+                
+                if (servers.error || servers.length === 0) {
+                    container.innerHTML = '<h4 style="color: #ffcd00; margin-bottom: 12px;">Individual Servers</h4><p style="color: #ff6b6b;">No servers found</p>';
+                    return;
+                }
+
+                let html = '<h4 style="color: #ffcd00; margin-bottom: 12px;">Individual Servers</h4>';
+                
+                servers.forEach((srv, index) => {
+                    html += `
+                        <div style="background: #0d1f2f; padding: 12px; margin-bottom: 8px; border-radius: 5px;">
+                            <div style="color: #ffffff; font-weight: 500; margin-bottom: 5px; font-family: 'Courier New', monospace;">
+                                ${srv.hostname}
+                            </div>
+                            <div style="color: #8195a5; font-size: 0.85em; margin-bottom: 5px;">
+                                ${srv.ipv4_addr_in || 'No IPv4'}
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                                <button 
+                                    onclick="testServerLatency('${srv.hostname}', 'latency_${index}')" 
+                                    style="background: #294f70; color: #ffffff; border: 1px solid #3a6591; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8em;"
+                                >
+                                    Test Latency
+                                </button>
+                                <span id="latency_${index}" style="color: #8195a5; font-size: 0.85em;"></span>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = '<h4 style="color: #ffcd00; margin-bottom: 12px;">Individual Servers</h4><p style="color: #ff6b6b;">Error loading servers</p>';
+            }
+        }
+
+        async function testServerLatency(hostname, resultId) {
+            const resultEl = document.getElementById(resultId);
+            resultEl.innerHTML = '<span style="color: #ffcd00;">Testing...</span>';
+            
+            try {
+                const response = await fetch(`/api/ping/${hostname}`);
+                const data = await response.json();
+                
+                if (data.status === 'success' && data.latency) {
+                    resultEl.innerHTML = `<span style="color: #69db7c; font-weight: 600;">${data.latency}ms</span>`;
+                } else {
+                    resultEl.innerHTML = '<span style="color: #ff6b6b;">Timeout</span>';
+                }
+            } catch (error) {
+                resultEl.innerHTML = '<span style="color: #ff6b6b;">Error</span>';
+            }
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+        }
+
+        // Event listeners
+        document.getElementById('ownedOnlyToggle').addEventListener('change', displayServers);
+        
+        document.getElementById('closePanelBtn').addEventListener('click', () => {
+            document.getElementById('serverPanel').classList.remove('show');
+        });
+
+        document.getElementById('myLocationBtn').addEventListener('click', () => {
+            if (!navigator.geolocation) {
+                showStatus('Geolocation not supported', 'error');
+                return;
+            }
+
+            showStatus('Getting your location...', 'info');
+            
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    // Remove old user marker if exists
+                    if (userMarker) {
+                        userMarker.setMap(null);
+                    }
+
+                    // Add user location marker
+                    userMarker = new google.maps.Marker({
+                        position: pos,
+                        map: map,
+                        title: 'Your Location',
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 10,
+                            fillColor: '#69db7c',
+                            fillOpacity: 1,
+                            strokeColor: '#ffffff',
+                            strokeWeight: 3
+                        }
+                    });
+
+                    map.setCenter(pos);
+                    map.setZoom(6);
+                    
+                    showStatus('Location found!', 'success');
+                    setTimeout(() => document.getElementById('status').style.display = 'none', 2000);
+                },
+                (error) => {
+                    showStatus('Unable to get your location', 'error');
+                    setTimeout(() => document.getElementById('status').style.display = 'none', 3000);
+                }
+            );
+        });
+    </script>
+</body>
+</html>
+

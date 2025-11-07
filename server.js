@@ -17,6 +17,11 @@ const supabase = createClient(
 // Serve static files from public directory
 app.use(express.static('public'));
 
+// API endpoint to get Google Maps API key
+app.get('/api/maps-key', (req, res) => {
+  res.json({ apiKey: process.env.GOOGLE_MAPS_API_KEY || '' });
+});
+
 // Get server locations with coordinates (single optimized query)
 async function getServerLocationsWithCoordinates() {
   try {
@@ -137,6 +142,32 @@ app.get('/api/servers', async (req, res) => {
   } catch (error) {
     console.error('Error in /api/servers:', error);
     res.status(500).json({ error: 'Failed to fetch servers' });
+  }
+});
+
+// API endpoint to get all server locations with coordinates (for map view)
+app.get('/api/servers-map', async (req, res) => {
+  try {
+    const locations = await getServerLocationsWithCoordinates();
+    
+    const cityList = locations.map(loc => ({
+      city: loc.city_name,
+      country: loc.country_name,
+      country_code: loc.country_code,
+      city_code: loc.city_code,
+      serverCount: loc.server_count,
+      provider: loc.provider,
+      speed: loc.speed,
+      owned: loc.owned,
+      latitude: loc.latitude,
+      longitude: loc.longitude
+    }));
+
+    console.log(`Returning ${cityList.length} server locations with coordinates for map`);
+    res.json(cityList);
+  } catch (error) {
+    console.error('Error in /api/servers-map:', error);
+    res.status(500).json({ error: 'Failed to fetch servers with coordinates' });
   }
 });
 

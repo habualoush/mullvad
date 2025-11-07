@@ -172,6 +172,17 @@
         <div class="controls">
             <button id="findClosestBtn" class="btn-primary">Find Closest Server</button>
             <button id="showAllBtn" class="btn-secondary">Browse All Servers</button>
+            <a href="map.html" style="padding: 16px 40px; font-size: 14px; border: 2px solid #69db7c; 
+                                      border-radius: 4px; text-decoration: none; font-weight: 600; 
+                                      text-transform: uppercase; letter-spacing: 0.5px; color: #69db7c; 
+                                      transition: all 0.2s ease; display: inline-block;"
+               onmouseover="this.style.background='rgba(105, 219, 124, 0.1)'; this.style.transform='translateY(-1px)';"
+               onmouseout="this.style.background='transparent'; this.style.transform='translateY(0)';">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Map View
+            </a>
         </div>
 
         <div id="closestServer" class="closest-server"></div>

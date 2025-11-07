@@ -8,6 +8,7 @@ A Node.js website that displays **real** Mullvad VPN servers (all 500+ active se
 
 ## Features
 
+### Core Features
 - **Real-time Mullvad API integration** - Fetches live server data from Mullvad's official API
 - **Find the closest server** to your current location using browser geolocation
 - **Distance calculation** using the Haversine formula
@@ -17,6 +18,19 @@ A Node.js website that displays **real** Mullvad VPN servers (all 500+ active se
 - **Server details** - Shows provider, speed, ownership status, and more
 - **Back to top button** for easy navigation
 - **Clickable homepage title** to reset and return to start
+
+### 🗺️ NEW: Interactive Map View
+- **Visual server browsing** on an interactive world map
+- **Color-coded markers** - Yellow for Mullvad-owned, blue for rented servers
+- **Click markers** to see detailed server information
+- **Filter servers** by ownership type
+- **Geolocation support** to center map on your location
+- **Latency testing** for individual servers directly from the map
+- **Responsive design** that works on desktop and mobile
+- **Smooth animations** and professional UI
+- See `QUICKSTART_MAP.md` for setup instructions
+
+### Additional Features
 - **GitHub Sponsors integration** for project support
 - **SEO optimized** with comprehensive meta tags for better search visibility
 - **Mobile-friendly** with responsive design and PWA capabilities
@@ -87,26 +101,40 @@ The application will be available at `http://localhost:3000`
 ## Usage
 
 1. Open your browser and navigate to `http://localhost:3000`
+
 2. **Click "Find Closest Server"**:
    - Requests your location (you must allow browser permission)
    - Fetches all active Mullvad servers
    - Geocodes city locations
    - Calculates distances and displays the closest server
    - Optionally click "Ping Server" to test latency
-3. **Click "Show All Servers"**:
+
+3. **Click "Browse All Servers"**:
    - Displays all Mullvad servers grouped by city
    - Shows provider, speed, and server count per location
+   - Expand cities to see individual servers and test latency
+
+4. **Click "Map View"** (NEW):
+   - Opens interactive map showing all server locations
+   - Click markers to see server details
+   - Filter by ownership type (owned vs rented)
+   - Test latency of individual servers
+   - Use "My Location" to center map on your position
+   - **Requires Google Maps API key** - See `QUICKSTART_MAP.md`
 
 **Note:** 
 - The browser will ask for permission to access your location. You must allow this for the closest server feature to work.
 - The Geolocation API requires HTTPS in production (or localhost for development).
 - All server data and coordinates are stored in Supabase for instant lookups.
+- Map view requires a free Google Maps API key (see setup instructions)
 
 ## API Endpoints
 
-- `GET /api/servers` - Returns all active Mullvad WireGuard servers with geocoded coordinates
+- `GET /api/servers` - Returns all active Mullvad WireGuard servers grouped by city
+- `GET /api/servers-map` - Returns all servers with latitude/longitude coordinates (optimized for map view)
+- `GET /api/servers/:city_code/:country_code` - Returns individual servers for a specific city
 - `GET /api/closest?lat={latitude}&lon={longitude}` - Returns the closest server to the given coordinates
-- `GET /api/ping/:hostname` - Pings a specific server and returns latency
+- `GET /api/ping/:hostname` - Tests TCP latency to a specific server
 
 ## How It Works
 
