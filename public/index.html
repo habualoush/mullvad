@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mullvad Server Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mullvad Server Finder</h1>
+            <p>Find the closest WireGuard server to your location</p>
+        </header>
+
+        <div id="status" class="status"></div>
+
+        <div class="controls">
+            <button id="findClosestBtn" class="btn-primary">Find Closest Server</button>
+            <button id="showAllBtn" class="btn-secondary">Browse All Servers</button>
+        </div>
+
+        <div id="closestServer" class="closest-server"></div>
+
+        <div id="sortControls" class="sort-controls" style="display: none;">
+            <div style="padding: 20px 40px; background: #1d3a54; border-bottom: 1px solid #2d4f6c;">
+                <label style="color: #b8c9d9; margin-right: 15px; font-weight: 500;">Sort by:</label>
+                <select id="sortSelect" style="padding: 8px 15px; background: #294d73; color: #ffffff; border: 1px solid #3a6591; border-radius: 4px; cursor: pointer; font-size: 0.95em;">
+                    <option value="country">Country</option>
+                    <option value="city">City Name</option>
+                    <option value="serverCount">Server Count</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="serversList" class="servers-list"></div>
+        
+        <footer>
+            <p>Data from <a href="https://api.mullvad.net/www/relays/wireguard/" target="_blank" rel="noopener">Mullvad API</a></p>
+            <p>Unofficial tool • Not affiliated with Mullvad VPN</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

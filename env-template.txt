@@ -1,0 +1,11 @@
+# Supabase Configuration
+# Get these from your Supabase project settings > API
+
+# Public anon key (for client-side, read-only access)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your-anon-key-here
+
+# Service role key (for server-side, bypasses RLS - keep secret!)
+# Only needed for setup-db script
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
+

@@ -1,0 +1,377 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #152736;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #294d73;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3a5f87;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #192e45;
+    min-height: 100vh;
+    padding: 0;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+header {
+    background: #294d73;
+    padding: 60px 40px;
+    text-align: center;
+    border-bottom: 3px solid #ffcd00;
+}
+
+header h1 {
+    font-size: 3em;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+header p {
+    color: #e0e0e0;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 40px;
+    background: #1d3a54;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 16px 40px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: #ffcd00;
+    color: #192e45;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #ffda3d;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.status {
+    text-align: center;
+    padding: 20px 40px;
+    margin: 0;
+    border-radius: 0;
+    font-weight: 500;
+    display: none;
+    font-size: 15px;
+}
+
+.status.info {
+    background: #294d73;
+    color: #ffcd00;
+    border-bottom: 2px solid #ffcd00;
+    display: block;
+}
+
+.status.error {
+    background: #4a2c2c;
+    color: #ff6b6b;
+    border-bottom: 2px solid #ff6b6b;
+    display: block;
+}
+
+.status.success {
+    background: #2c4a2c;
+    color: #69db7c;
+    border-bottom: 2px solid #69db7c;
+    display: block;
+}
+
+.closest-server {
+    background: #234057;
+    color: white;
+    padding: 50px 40px;
+    margin: 0;
+    text-align: center;
+    display: none;
+    border-bottom: 1px solid #2c4f6b;
+}
+
+.closest-server.show {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.closest-server h2 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #ffcd00;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.closest-server .server-name {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin: 15px 0;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+}
+
+.closest-server .server-info {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: #b8c9d9;
+}
+
+.servers-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1px;
+    background: #152736;
+    padding: 0;
+    margin: 0;
+}
+
+.server-card {
+    background: #1d3a54;
+    border: none;
+    border-radius: 0;
+    padding: 25px 30px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-bottom: 1px solid #152736;
+}
+
+.server-card:hover {
+    background: #234057;
+    border-left: 4px solid #ffcd00;
+    padding-left: 26px;
+}
+
+.server-card.closest {
+    background: #2d4a5e;
+    border-left: 4px solid #ffcd00;
+    padding-left: 26px;
+}
+
+.server-card .server-name {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+    font-family: 'Courier New', monospace;
+}
+
+.server-card.closest .server-name {
+    color: #ffcd00;
+}
+
+.server-card .server-country {
+    font-size: 1em;
+    color: #b8c9d9;
+    margin-bottom: 8px;
+}
+
+.server-card.closest .server-country {
+    color: #e0ecf7;
+}
+
+.server-card .server-city {
+    font-size: 0.9em;
+    color: #8195a5;
+    margin-bottom: 6px;
+}
+
+.server-card.closest .server-city {
+    color: #b8c9d9;
+}
+
+.server-card .server-distance {
+    font-size: 0.85em;
+    color: #6b7f91;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #294557;
+}
+
+.server-card.closest .server-distance {
+    color: #b8c9d9;
+    border-top-color: #3d5a70;
+}
+
+.city-header {
+    cursor: pointer;
+}
+
+.expand-icon {
+    transition: transform 0.3s ease;
+    user-select: none;
+}
+
+.server-list-container {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.badge {
+    display: inline-block;
+    background: #ffcd00;
+    color: #192e45;
+    padding: 4px 14px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    font-weight: 700;
+    margin-left: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-ping {
+    margin-top: 20px;
+    background: transparent;
+    color: #ffcd00;
+    border: 2px solid #ffcd00;
+    padding: 12px 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+}
+
+.btn-ping:hover {
+    background: #ffcd00;
+    color: #192e45;
+}
+
+footer {
+    background: #152736;
+    padding: 40px;
+    text-align: center;
+    color: #6b7f91;
+    font-size: 0.9em;
+    border-top: 1px solid #1d3a54;
+}
+
+footer p {
+    margin: 8px 0;
+}
+
+footer a {
+    color: #ffcd00;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #ffda3d;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 40px 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    .controls {
+        padding: 30px 20px;
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .servers-list {
+        grid-template-columns: 1fr;
+    }
+
+    .closest-server {
+        padding: 40px 20px;
+    }
+
+    .closest-server .server-name {
+        font-size: 1.8em;
+    }
+}
+
