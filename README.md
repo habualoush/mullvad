@@ -9,8 +9,13 @@ A Node.js website that displays **real** Mullvad VPN servers (all 500+ active se
 - 🎯 **Distance calculation** using the Haversine formula
 - 🔍 **Ping servers** to measure actual latency (requires server to be accessible)
 - 🗺️ **Automatic geocoding** of city locations using OpenStreetMap Nominatim API
-- 💻 Modern, responsive UI with gradient styling
+- 💻 Modern, responsive UI with gradient styling and comprehensive instructions
 - 📊 Shows server details: provider, speed, ownership status, and more
+- 🔝 **Back to top button** for easy navigation
+- 🏠 **Clickable homepage title** to reset and return to start
+- 🎨 **GitHub Sponsors integration** for project support
+- 🚀 **SEO optimized** with comprehensive meta tags for better search visibility
+- 📱 **Mobile-friendly** with responsive design and PWA capabilities
 
 ## Data Sources
 
@@ -57,6 +62,15 @@ This will fetch all active Mullvad servers and populate your Supabase database w
    - Replace all instances of `YOUR_GITHUB_USERNAME` with your actual GitHub username
    - Update the repository name `mullvad-server-finder` if you've named it differently
    - If you don't have GitHub Sponsors set up, you can remove the sponsor buttons or replace with alternative donation links
+
+6. **Configure SEO Settings (Recommended)**:
+   - Open `public/index.html`
+   - Replace `https://your-domain.com/` with your actual domain (appears in multiple meta tags)
+   - Update Open Graph image URLs:
+     - `og:image` - Create a 1200x630px image and update the URL
+     - `twitter:image` - Create a 1200x600px image and update the URL
+   - Customize meta description if needed
+   - Update canonical URL with your actual domain
 
 ## Running the Application
 
@@ -110,6 +124,27 @@ The application will be available at `http://localhost:3000`
 ## Server Count
 
 As of the latest Mullvad data: **~526 active WireGuard servers** across **~90 cities worldwide**
+
+## SEO Features
+
+The application includes comprehensive SEO optimization:
+
+- **Meta Tags**: Title, description, keywords, author, robots, and language
+- **Open Graph Tags**: For beautiful Facebook/LinkedIn sharing previews
+- **Twitter Card Tags**: Optimized cards for Twitter sharing
+- **Structured Data**: JSON-LD schema markup for search engines
+- **Mobile Meta Tags**: PWA-ready with theme colors and app capabilities
+- **Canonical URLs**: Prevents duplicate content issues
+- **Semantic HTML**: Proper heading hierarchy and semantic elements
+
+### Customizing SEO
+
+1. Replace `https://your-domain.com/` with your actual domain in all meta tags
+2. Create social sharing images:
+   - **Open Graph**: 1200x630px (saved as `og-image.jpg`)
+   - **Twitter Card**: 1200x600px (saved as `twitter-card.jpg`)
+3. Update the canonical URL to match your domain
+4. Customize meta descriptions for your specific use case
 
 ## Contributing
 

@@ -3,7 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mullvad Server Finder</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Mullvad Server Finder - Find the Fastest WireGuard VPN Server Near You</title>
+    <meta name="description" content="Find the fastest Mullvad VPN WireGuard server near you. Test latency, compare 500+ servers across 90+ cities worldwide. Free tool with real-time server data and location-based recommendations.">
+    <meta name="keywords" content="Mullvad VPN, WireGuard, VPN server finder, fastest VPN server, Mullvad servers, VPN latency test, closest VPN server, privacy VPN, secure VPN, Mullvad WireGuard">
+    <meta name="author" content="Mullvad Server Finder">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="Mullvad Server Finder - Find the Fastest WireGuard VPN Server">
+    <meta property="og:description" content="Discover the fastest Mullvad VPN server near you. Test latency on 500+ WireGuard servers across 90+ cities worldwide.">
+    <meta property="og:image" content="https://your-domain.com/og-image.jpg">
+    <meta property="og:site_name" content="Mullvad Server Finder">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://your-domain.com/">
+    <meta name="twitter:title" content="Mullvad Server Finder - Find the Fastest WireGuard VPN Server">
+    <meta name="twitter:description" content="Discover the fastest Mullvad VPN server near you. Test latency on 500+ WireGuard servers worldwide.">
+    <meta name="twitter:image" content="https://your-domain.com/twitter-card.jpg">
+    
+    <!-- Additional SEO -->
+    <link rel="canonical" href="https://your-domain.com/">
+    <meta name="theme-color" content="#192e45">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mullvad Finder">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Mullvad Server Finder",
+      "description": "Find the fastest Mullvad VPN WireGuard server near you with real-time latency testing",
+      "url": "https://your-domain.com/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Mullvad Server Finder"
+      }
+    }
+    </script>
+    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +69,12 @@
         <header>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                 <div>
-                    <h1>Mullvad Server Finder</h1>
+                    <h1 style="cursor: pointer; transition: color 0.2s;" onclick="window.location.reload();" 
+                        onmouseover="this.style.color='#69db7c';" 
+                        onmouseout="this.style.color='';"
+                        title="Click to reset and return to homepage">
+                        <span style="margin-right: 8px;">🏠</span>Mullvad Server Finder
+                    </h1>
                     <p>Find the closest WireGuard server to your location</p>
                 </div>
                 <div style="text-align: right;">
@@ -100,6 +160,28 @@
         </div>
 
         <div id="serversList" class="servers-list"></div>
+        
+        <!-- Back to Top Button -->
+        <button id="backToTopBtn" title="Back to top" style="
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #3a6591 0%, #294d73 100%);
+            color: white;
+            border: 2px solid #4a7ab1;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        " onmouseover="this.style.background='linear-gradient(135deg, #4a7ab1 0%, #3a6591 100%)'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 16px rgba(0, 0, 0, 0.4)';"
+           onmouseout="this.style.background='linear-gradient(135deg, #3a6591 0%, #294d73 100%)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.3)';">
+            ↑
+        </button>
         
         <footer>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 20px;">

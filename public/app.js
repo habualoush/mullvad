@@ -499,3 +499,23 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
     return R * c; // Distance in kilometers
 }
 
+// Back to Top Button Functionality
+const backToTopBtn = document.getElementById('backToTopBtn');
+
+// Show button when user scrolls down 300px from the top
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = 'block';
+    } else {
+        backToTopBtn.style.display = 'none';
+    }
+});
+
+// Scroll to top when button is clicked
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
