@@ -193,7 +193,7 @@ app.get('/api/servers/:city_code/:country_code', async (req, res) => {
   }
 });
 
-// API endpoint to find closest server (HYBRID APPROACH)
+// API endpoint to find closest server (CLIENT-SIDE LATENCY TESTING)
 app.get('/api/closest', async (req, res) => {
   const lat = parseFloat(req.query.lat);
   const lon = parseFloat(req.query.lon);
@@ -203,12 +203,12 @@ app.get('/api/closest', async (req, res) => {
   }
 
   try {
-    console.log(`\n[HYBRID] Finding best server for: ${lat}, ${lon}`);
+    console.log(`\n[CLIENT-SIDE] Finding candidate servers for: ${lat}, ${lon}`);
     
     // STEP 1: Get all locations with coordinates (single query)
     const startTime = Date.now();
     const locations = await getServerLocationsWithCoordinates();
-    console.log(`[HYBRID] Fetched ${locations.length} locations in ${Date.now() - startTime}ms`);
+    console.log(`[CLIENT-SIDE] Fetched ${locations.length} locations in ${Date.now() - startTime}ms`);
     
     // STEP 2: Calculate geographic distances to all
     const locationsWithDistance = locations
@@ -219,103 +219,50 @@ app.get('/api/closest', async (req, res) => {
       }))
       .sort((a, b) => a.geoDistance - b.geoDistance);
     
-    // STEP 3: Take top 25 closest by geography for better network diversity
+    // STEP 3: Take top 25 closest by geography for browser to test
     const topCandidates = locationsWithDistance.slice(0, 25);
-    console.log(`[HYBRID] Top 25 candidates by distance:`);
+    console.log(`[CLIENT-SIDE] Top 25 candidates by distance (browser will test latency):`);
     topCandidates.forEach((loc, i) => {
       console.log(`  ${i + 1}. ${loc.city_name}, ${loc.country_name} - ${Math.round(loc.geoDistance)} km`);
     });
     
-    // STEP 4: Test actual TCP latency to these candidates (test ALL servers per city)
-    console.log(`[HYBRID] Testing TCP latency to servers in top ${topCandidates.length} candidate cities...`);
-    const latencyTests = await Promise.all(
+    // STEP 4: Get a representative server from each candidate location
+    const candidatesWithServers = await Promise.all(
       topCandidates.map(async (location) => {
-        // Get ALL servers from this location to find the fastest one
+        // Get one server from this location (browser will test it)
         const { data: servers } = await supabase
           .from('servers')
           .select('hostname, ipv4_addr_in, ipv6_addr_in')
           .eq('city_code', location.city_code)
-          .eq('country_code', location.country_code);
+          .eq('country_code', location.country_code)
+          .limit(1);
         
-        if (!servers || servers.length === 0) {
-          return { ...location, server: null, tcpLatency: null };
-        }
+        const server = servers && servers.length > 0 ? servers[0] : null;
         
-        // Test ALL servers in this city and pick the fastest
-        const serverTests = await Promise.all(
-          servers.map(async (server) => {
-            if (!server.ipv4_addr_in) return { server, latency: null };
-            const tcpLatency = await testServerLatency(server.ipv4_addr_in);
-            return { server, latency: tcpLatency };
-          })
-        );
-        
-        // Find the server with the lowest latency
-        const validTests = serverTests.filter(t => t.latency !== null);
-        if (validTests.length === 0) {
-          console.log(`  ${location.city_name}: all servers timeout (tested ${servers.length})`);
-          return { ...location, server: servers[0], tcpLatency: null };
-        }
-        
-        validTests.sort((a, b) => a.latency - b.latency);
-        const bestServer = validTests[0];
-        
-        console.log(`  ${location.city_name}: ${bestServer.latency}ms (best of ${servers.length} servers)`);
-        
-        return { ...location, server: bestServer.server, tcpLatency: bestServer.latency };
+        return {
+          hostname: server?.hostname || `${location.city_code}-server`,
+          name: server?.hostname || `${location.city_code}-server`,
+          country: location.country_name,
+          country_code: location.country_code,
+          city: location.city_name,
+          city_code: location.city_code,
+          latitude: location.latitude,
+          longitude: location.longitude,
+          ipv4: server?.ipv4_addr_in,
+          ipv6: server?.ipv6_addr_in,
+          provider: location.provider,
+          owned: location.owned,
+          speed: location.speed,
+          distance: Math.round(location.geoDistance),
+          serverCount: location.server_count,
+          tcpLatency: null // Browser will test this
+        };
       })
     );
     
-    // STEP 5: Sort by latency and return top 5
-    const validResults = latencyTests.filter(r => r.tcpLatency !== null);
-    
-    let topServers;
-    if (validResults.length > 0) {
-      // Sort by actual TCP latency and take top 5
-      validResults.sort((a, b) => a.tcpLatency - b.tcpLatency);
-      topServers = validResults.slice(0, 5);
-      console.log(`[HYBRID] Top 5 servers by latency:`);
-      topServers.forEach((s, i) => {
-        console.log(`  ${i + 1}. ${s.city_name} - ${s.tcpLatency}ms`);
-      });
-    } else {
-      // Fallback to closest by distance if all TCP tests failed
-      topServers = topCandidates.slice(0, 5);
-      // Get server info for each
-      for (const server of topServers) {
-        const { data: servers } = await supabase
-          .from('servers')
-          .select('hostname, ipv4_addr_in, ipv6_addr_in')
-          .eq('city_code', server.city_code)
-          .eq('country_code', server.country_code)
-          .limit(1);
-        server.server = servers && servers.length > 0 ? servers[0] : null;
-      }
-      console.log(`[HYBRID] All TCP tests failed, using top 5 by distance`);
-    }
-    
-    // Format response - return array of top 5
-    const results = topServers.map(server => ({
-      hostname: server.server?.hostname || `${server.city_code}-server`,
-      name: server.server?.hostname || `${server.city_code}-server`,
-      country: server.country_name,
-      country_code: server.country_code,
-      city: server.city_name,
-      city_code: server.city_code,
-      latitude: server.latitude,
-      longitude: server.longitude,
-      ipv4: server.server?.ipv4_addr_in,
-      ipv6: server.server?.ipv6_addr_in,
-      provider: server.provider,
-      owned: server.owned,
-      speed: server.speed,
-      distance: Math.round(server.geoDistance),
-      serverCount: server.server_count,
-      tcpLatency: server.tcpLatency
-    }));
-    
-    console.log(`[HYBRID] Total time: ${Date.now() - startTime}ms\n`);
-    res.json(results);
+    console.log(`[CLIENT-SIDE] Returning ${candidatesWithServers.length} candidates for browser testing`);
+    console.log(`[CLIENT-SIDE] Total time: ${Date.now() - startTime}ms\n`);
+    res.json(candidatesWithServers);
     
   } catch (error) {
     console.error('Error in /api/closest:', error);
